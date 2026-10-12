@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Withings OAuth redirect</title>
+</head>
+<body>
+<p id="msg">OK</p>
+<script>
+// Stores nothing. Forwards the one-time OAuth code to the private bridge, reachable only inside the owner's Tailscale network.
+var BRIDGE = "https://mediaserver.tail2d438e.ts.net:8444/oauth/withings/callback";
+var q = new URLSearchParams(location.search);
+if (q.get("code") && q.get("state")) {
+  document.getElementById("msg").textContent = "A ligar ao servidor...";
+  location.replace(BRIDGE + "?" + new URLSearchParams({code: q.get("code"), state: q.get("state")}));
+} else if (q.get("error")) {
+  document.getElementById("msg").textContent = "A Withings devolveu um erro: " + q.get("error");
+}
+</script>
+</body>
+</html>
