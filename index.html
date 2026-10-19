@@ -10,8 +10,8 @@
 <body>
 <p id="msg">OK</p>
 <script>
-// Stores nothing. Forwards the one-time OAuth code to the private bridge, reachable only inside the owner's Tailscale network.
-var BRIDGE = "https://mediaserver.tail2d438e.ts.net:8444/oauth/withings/callback";
+// Stores nothing. Forwards the one-time OAuth code to the private bridge, running on the owner's own Mac (127.0.0.1).
+var BRIDGE = "http://127.0.0.1:8000/oauth/withings/callback";
 var q = new URLSearchParams(location.search);
 if (q.get("code") && q.get("state")) {
   document.getElementById("msg").textContent = "A ligar ao servidor...";
